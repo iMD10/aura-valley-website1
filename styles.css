@@ -1,0 +1,302 @@
+/*
+ * Professional Architecture Portfolio Website Stylesheet
+ *
+ * This stylesheet establishes a minimal, premium look and feel appropriate for an
+ * architectural presentation. A restrained colour palette, generous spacing,
+ * clear hierarchy and a consistent scale system create a refined aesthetic.
+ * Type choices pair a confident serif for headings with a clean grotesk for
+ * body copy.  Points of interaction are subtly highlighted and remain usable
+ * across desktop and mobile without intrusive decoration.
+ */
+
+/* CSS variables allow for easy palette changes and typographic scaling. */
+:root {
+  --color-bg: #f6f6f4;
+  --color-surface: #ffffff;
+  --color-text: #1c1c1c;
+  --color-muted: #8a8a8a;
+  --color-accent: #a5885d; /* muted clay accent */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --spacing-small: 0.5rem;
+  --spacing-med: 1rem;
+  --spacing-large: 2rem;
+  --max-content-width: 1200px;
+  --border-radius: 4px;
+}
+
+/* Global resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Layout container helps centre content and provides consistent horizontal
+   spacing. */
+.container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-med);
+}
+
+/* Headings use our serif typeface and a consistent vertical rhythm. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-med);
+  line-height: 1.2;
+}
+
+p {
+  margin-bottom: var(--spacing-med);
+  font-weight: 300;
+}
+
+/* Buttons: simple, elegant and usable on touch. */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-small) var(--spacing-large);
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn:hover, .btn:focus {
+  background-color: #8c6f48;
+}
+
+/* Navigation links appear at the top left of pages except landing. */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-med) 0;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  margin-right: var(--spacing-med);
+  color: var(--color-muted);
+  text-decoration: none;
+  position: relative;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* Hero section for landing page */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 80vh;
+  gap: var(--spacing-large);
+}
+
+.hero .hero-text {
+  max-width: 540px;
+}
+
+.hero .hero-image {
+  position: relative;
+}
+
+.hero .hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  max-height: 60vh;
+}
+
+/* Section headings and subheadings */
+.section {
+  padding: var(--spacing-large) 0;
+}
+
+/* Site and plan image containers */
+.image-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Clickable points on site and plan images */
+.point {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(255,255,255,0.8);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--color-text);
+}
+
+.point:hover {
+  transform: scale(1.2);
+}
+
+.point .label {
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(28, 28, 28, 0.8);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: var(--border-radius);
+  font-size: 0.65rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.point:hover .label {
+  opacity: 1;
+}
+
+/* Gallery grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-med);
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background-color: var(--color-surface);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Modal for enlarged gallery images */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: var(--border-radius);
+}
+
+.modal .close {
+  position: absolute;
+  top: var(--spacing-large);
+  right: var(--spacing-large);
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Instructions for plan and VR pages */
+.instructions {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-top: var(--spacing-small);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero .hero-image {
+    order: -1;
+  }
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .point {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+  .point .label {
+    font-size: 0.7rem;
+  }
+}

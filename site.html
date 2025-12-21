@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site — Architectural Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html">← Back to Landing</a>
+    </nav>
+    <h1>Site</h1>
+    <p>Discover the context and environment in which this project is situated. Click
+      on the highlighted markers to continue your journey.</p>
+    <div class="image-container">
+      <img src="assets/site.jpg" alt="Site photograph of the project">
+      <!-- Primary navigation point to plan page -->
+      <a href="plan.html" class="point" style="top: 45%; left: 60%;">
+        <span class="label">Plan</span>
+      </a>
+      <!-- Additional illustrative markers (non-clickable) -->
+      <div class="point" style="top: 25%; left: 30%; pointer-events: none;">
+        <span class="label">A</span>
+      </div>
+      <div class="point" style="top: 70%; left: 40%; pointer-events: none;">
+        <span class="label">B</span>
+      </div>
+    </div>
+    <p class="instructions">Tap the “Plan” marker to view the architectural plan.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

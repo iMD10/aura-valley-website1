@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan — Architectural Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="site.html">← Back to Site</a>
+      <a href="index.html">Landing</a>
+    </nav>
+    <h1>Plan</h1>
+    <div class="image-container" id="plan-container">
+      <img id="plan-image" src="assets/plan.jpg" alt="Architectural plan showing layout of project site">
+      <!-- Interactive points mapped to gallery and VR pages -->
+      <a href="gallery.html" class="point" style="top: 40%; left: 25%;">
+        <span class="label">Gallery</span>
+      </a>
+      <a href="vr.html" class="point" style="top: 65%; left: 70%;">
+        <span class="label">VR</span>
+      </a>
+    </div>
+    <p class="instructions">Use scroll or pinch gestures to zoom, and drag to pan across the plan.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
