@@ -294,7 +294,8 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(28, 28, 28, 0.4);
+  /* Darker overlay to improve text contrast on the landing page */
+  background: rgba(28, 28, 28, 0.6);
   z-index: 0;
 }
 
@@ -318,6 +319,23 @@ p {
 .hero-landing .btn {
   background-color: var(--color-accent);
   color: var(--color-surface);
+}
+
+/* Container for landing hero content to ensure readability */
+.hero-content {
+  max-width: 600px;
+  background: rgba(28, 28, 28, 0.7);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(2px);
+}
+
+.hero-content h1 {
+  margin-bottom: var(--spacing-med);
+}
+
+.hero-content p {
+  color: #eaeaea;
 }
 
 /* Instructions for plan and VR pages */
