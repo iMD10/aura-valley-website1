@@ -282,7 +282,9 @@ p {
   color: #ffffff;
   text-align: center;
   padding: var(--spacing-large);
-  background-image: url('assets/site.jpg');
+  /* Use a dedicated landing image separate from the site photograph. Replace
+     assets/landing.jpg with your own image to customise the landing page. */
+  background-image: url('assets/landing.jpg');
   background-size: cover;
   background-position: center;
 }
