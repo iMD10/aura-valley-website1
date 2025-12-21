@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Architecture Project</title>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -18,11 +19,17 @@ body{
 section{display:none}
 .btn{
   padding:14px 26px;
-  border:1px solid rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
   cursor:pointer;
-  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  font-weight:600;
+  letter-spacing:.5px;
 }
-.btn:hover{background:#fff;color:#000}
+.btn:hover{background:#fff;color:#000;transform:translateY(-1px);border-color:#fff}
+.btn:active{transform:translateY(1px)}
 
 /* LANDING */
 #landing{display:block;height:100vh;position:relative}
@@ -44,6 +51,7 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
 .site-container{position:relative;max-width:1200px;margin:auto}
 .site-container img{
   width:100%;
+  height:auto;
   border-radius:12px;
   box-shadow:0 40px 80px rgba(0,0,0,.7)
 }
@@ -58,9 +66,10 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
 }
 .dot{
   width:18px;height:18px;
-  background:#ff8c32;
+  background:radial-gradient(circle at 30% 30%,#ffd0a3,#ff8c32 60%,#c85a0c);
   border-radius:50%;
-  box-shadow:0 0 20px rgba(255,140,50,1)
+  box-shadow:0 0 18px rgba(255,140,50,.7);
+  border:2px solid rgba(255,255,255,.7)
 }
 .label{
   background:rgba(15,15,15,.8);
@@ -98,7 +107,7 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
 
 /* PLAN */
 #plan-wrapper{position:relative;margin-top:15px}
-#plan{width:100%;border-radius:10px;cursor:grab}
+#plan{width:100%;border-radius:10px;cursor:grab;max-height:70vh;object-fit:contain}
 .plan-hotspot{
   position:absolute;
   transform:translate(-50%,-50%);
@@ -113,6 +122,8 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
 }
 .gallery img{
   width:100%;
+  height:180px;
+  object-fit:cover;
   border-radius:10px;
   cursor:pointer;
   transition:.3s
@@ -120,11 +131,33 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
 .gallery img:hover{transform:scale(1.03)}
 
 /* VR */
-#vr{height:100vh}
+#vr{height:100vh;position:relative}
+.vr-back{
+  position:absolute;
+  top:18px;
+  left:18px;
+  z-index:2
+}
 
 /* MOBILE */
 @media(max-width:768px){
-  h1{font-size:2.3rem}
+  #landing{height:100svh}
+  .landing-content{
+    left:6%;
+    right:6%;
+    bottom:8%;
+    max-width:none
+  }
+  h1{font-size:2.2rem;letter-spacing:2px}
+  p{font-size:0.98rem}
+  .btn{
+    width:100%;
+    text-align:center;
+    margin-top:16px
+  }
+  #site{padding:18px}
+  .site-header{margin-bottom:10px}
+  .site-container img{border-radius:10px}
   .label{display:none}
   .hotspot.active .label{
     display:block;
@@ -134,7 +167,23 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
     transform:translateX(-50%);
     font-size:12px
   }
-  .dot{width:22px;height:22px}
+  .dot{width:24px;height:24px}
+  .modal-box{
+    width:94%;
+    padding:18px
+  }
+  .close{top:10px;right:14px}
+  #plan{border-radius:8px}
+  .gallery{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+}
+
+@media(max-width:480px){
+  h1{font-size:1.9rem}
+  .landing-content{bottom:6%}
+  .btn{padding:14px 18px}
+  .site-header{font-size:0.95rem}
+  .modal-box h3{font-size:1rem;margin-right:28px}
+  .gallery{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -206,12 +255,13 @@ p{margin-top:18px;line-height:1.7;color:#ddd}
 <div class="modal" id="lightbox">
   <div class="modal-box">
     <span class="close" onclick="closeLightbox()">×</span>
-    <img id="lightboxImg" style="width:100%;border-radius:10px">
+    <img id="lightboxImg" style="width:100%;border-radius:10px;max-height:70vh;object-fit:contain">
   </div>
 </div>
 
 <!-- VR -->
 <section id="vr">
+  <div class="btn vr-back" onclick="goSite()">← Back to Site</div>
   <a-scene embedded>
     <a-sky src="vr.jpg" rotation="0 -120 0"></a-sky>
   </a-scene>
