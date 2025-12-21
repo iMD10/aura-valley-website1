@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Architecture Project</title>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@9.4.0/dist/panzoom.min.js"></script>
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  background:radial-gradient(circle at top,#1a1a1a,#080808);
+  color:#fff;
+}
+section{display:none}
+.btn{
+  padding:14px 26px;
+  border:1px solid rgba(255,255,255,.7);
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+}
+.btn:hover{background:#fff;color:#000}
+
+/* LANDING */
+#landing{display:block;height:100vh;position:relative}
+#landing img{width:100%;height:100%;object-fit:cover;filter:brightness(.45)}
+.landing-content{
+  position:absolute;
+  bottom:14%;
+  left:8%;
+  max-width:520px
+}
+h1{font-size:3.6rem;letter-spacing:3px}
+p{margin-top:18px;line-height:1.7;color:#ddd}
+
+/* SITE */
+#site{padding:30px}
+.site-header{margin-bottom:15px}
+.back-btn{cursor:pointer;opacity:.8}
+.back-btn:hover{opacity:1}
+.site-container{position:relative;max-width:1200px;margin:auto}
+.site-container img{
+  width:100%;
+  border-radius:12px;
+  box-shadow:0 40px 80px rgba(0,0,0,.7)
+}
+
+/* HOTSPOTS */
+.hotspot{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer
+}
+.dot{
+  width:18px;height:18px;
+  background:#ff8c32;
+  border-radius:50%;
+  box-shadow:0 0 20px rgba(255,140,50,1)
+}
+.label{
+  background:rgba(15,15,15,.8);
+  padding:6px 12px;
+  font-size:13px;
+  border-radius:6px;
+  letter-spacing:1px;
+  text-transform:uppercase
+}
+
+/* MODALS */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000
+}
+.modal-box{
+  width:92%;
+  max-width:1050px;
+  background:linear-gradient(180deg,#181818,#0d0d0d);
+  padding:24px;
+  border-radius:12px;
+  position:relative
+}
+.close{
+  position:absolute;
+  top:14px;right:18px;
+  font-size:26px;
+  cursor:pointer
+}
+
+/* PLAN */
+#plan-wrapper{position:relative;margin-top:15px}
+#plan{width:100%;border-radius:10px;cursor:grab}
+.plan-hotspot{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  cursor:pointer
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px
+}
+.gallery img{
+  width:100%;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.3s
+}
+.gallery img:hover{transform:scale(1.03)}
+
+/* VR */
+#vr{height:100vh}
+
+/* MOBILE */
+@media(max-width:768px){
+  h1{font-size:2.3rem}
+  .label{display:none}
+  .hotspot.active .label{
+    display:block;
+    position:absolute;
+    top:-38px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:12px
+  }
+  .dot{width:22px;height:22px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+<section id="landing">
+  <img src="hero.jpg">
+  <div class="landing-content">
+    <h1>PROJECT NAME</h1>
+    <p>
+      A site-driven architectural project integrating
+      structure, circulation, and material logic.
+    </p>
+    <div class="btn" onclick="goSite()">ENTER THE SITE</div>
+  </div>
+</section>
+
+<!-- SITE -->
+<section id="site">
+  <div class="site-header">
+    <div class="back-btn" onclick="goLanding()">← Back</div>
+  </div>
+
+  <div class="site-container">
+    <img src="site.jpg">
+
+    <div class="hotspot" style="top:28%;left:42%" data-title="Main Entrance"><div class="dot"></div><div class="label">Main Entrance</div></div>
+    <div class="hotspot" style="top:45%;left:55%" data-title="Central Core"><div class="dot"></div><div class="label">Central Core</div></div>
+    <div class="hotspot" style="top:60%;left:36%" data-title="Service Zone"><div class="dot"></div><div class="label">Service Zone</div></div>
+    <div class="hotspot" style="top:38%;left:68%" data-title="Public Plaza"><div class="dot"></div><div class="label">Public Plaza</div></div>
+    <div class="hotspot" style="top:72%;left:55%" data-title="Landscape Edge"><div class="dot"></div><div class="label">Landscape Edge</div></div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<div class="modal" id="planModal">
+  <div class="modal-box">
+    <span class="close" onclick="closePlan()">×</span>
+    <h3 id="planTitle"></h3>
+
+    <div id="plan-wrapper">
+      <img src="plan.jpg" id="plan">
+      <div class="plan-hotspot" style="top:30%;left:42%" onclick="openGallery()"><div class="dot"></div></div>
+      <div class="plan-hotspot" style="top:48%;left:55%" onclick="openGallery()"><div class="dot"></div></div>
+      <div class="plan-hotspot" style="top:62%;left:36%" onclick="openGallery()"><div class="dot"></div></div>
+      <div class="plan-hotspot" style="top:40%;left:68%" onclick="openGallery()"><div class="dot"></div></div>
+      <div class="plan-hotspot" style="top:72%;left:55%" onclick="openGallery()"><div class="dot"></div></div>
+    </div>
+
+    <div class="btn" style="margin-top:18px" onclick="openVR()">View VR</div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="modal" id="galleryModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeGallery()">×</span>
+    <div class="gallery">
+      <img src="g1.jpg" onclick="openLightbox(this.src)">
+      <img src="g2.jpg" onclick="openLightbox(this.src)">
+      <img src="g3.jpg" onclick="openLightbox(this.src)">
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="modal" id="lightbox">
+  <div class="modal-box">
+    <span class="close" onclick="closeLightbox()">×</span>
+    <img id="lightboxImg" style="width:100%;border-radius:10px">
+  </div>
+</div>
+
+<!-- VR -->
+<section id="vr">
+  <a-scene embedded>
+    <a-sky src="vr.jpg" rotation="0 -120 0"></a-sky>
+  </a-scene>
+</section>
+
+<script>
+let lastPlanTitle = "";
+
+function hideAllSections(){
+  ["landing","site","vr"].forEach(id=>{
+    const el=document.getElementById(id);
+    el.style.display="none";
+    el.style.opacity=1;
+  });
+}
+
+function goSite(){
+  gsap.to("#landing",{opacity:0,duration:.5,onComplete:()=>{
+    hideAllSections();
+    document.getElementById("site").style.display="block";
+    gsap.from("#site",{opacity:0,duration:.5});
+  }});
+}
+
+function goLanding(){
+  hideAllSections();
+  document.getElementById("landing").style.display="block";
+}
+
+document.querySelectorAll(".hotspot").forEach(h=>{
+  h.addEventListener("click",()=>{
+    if(window.innerWidth<=768){
+      if(!h.classList.contains("active")){
+        document.querySelectorAll(".hotspot").forEach(x=>x.classList.remove("active"));
+        h.classList.add("active");
+        return;
+      }
+    }
+    openPlan(h.dataset.title);
+  });
+});
+
+function openPlan(title){
+  lastPlanTitle=title;
+  document.getElementById("planTitle").innerText=title;
+  document.getElementById("planModal").style.display="flex";
+  Panzoom(document.getElementById("plan"),{maxScale:5});
+}
+
+function closePlan(){
+  document.getElementById("planModal").style.display="none";
+}
+
+function openGallery(){
+  document.getElementById("planModal").style.display="none";
+  document.getElementById("galleryModal").style.display="flex";
+}
+
+function closeGallery(){
+  document.getElementById("galleryModal").style.display="none";
+  document.getElementById("planModal").style.display="flex";
+}
+
+function openLightbox(src){
+  document.getElementById("lightboxImg").src=src;
+  document.getElementById("lightbox").style.display="flex";
+}
+
+function closeLightbox(){
+  document.getElementById("lightbox").style.display="none";
+}
+
+function openVR(){
+  document.getElementById("planModal").style.display="none";
+  hideAllSections();
+  document.getElementById("vr").style.display="block";
+}
+</script>
+
+</body>
+</html>
