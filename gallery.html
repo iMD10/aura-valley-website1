@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Architecture Project – Gallery</title>
+  <title>Aura Valley – Gallery</title>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
   <script>
     tailwind = window.tailwind || {};
@@ -11,14 +11,16 @@
       theme: {
         extend: {
           colors: {
-            background: '#f7f7f5',
-            primary: '#1f1f1f',
-            secondary: '#4a4a4a',
-            accent: '#8c8c8c'
+            background: '#f7f0e6',
+            primary:    '#5a4031',
+            secondary:  '#7c6755',
+            accent:     '#b78a60',
+            olive:      '#8c926d',
+            glass:      'rgba(245, 235, 220, 0.8)'
           },
           fontFamily: {
             serif: ['"Libre Baskerville"', 'serif'],
-            sans: ['"Inter"', 'sans-serif']
+            sans:  ['"Inter"', 'sans-serif']
           }
         }
       }
@@ -26,13 +28,13 @@
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-background text-secondary font-sans antialiased">
+<body class="bg-[rgba(245,235,220,0.92)] text-secondary font-sans antialiased">
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur border-b border-secondary/10">
+  <!-- Interior pages navbar: solid background, no blur -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[rgba(245,235,220,0.92)] border-b border-primary/10">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="index.html" class="text-primary font-serif text-xl font-bold">Project&nbsp;Title</a>
+      <a href="index.html" class="text-primary font-serif text-xl font-bold">Aura&nbsp;Valley</a>
       <div class="space-x-6 hidden sm:flex">
-        <a href="overview.html" class="hover:text-primary transition-colors">Overview</a>
         <a href="gallery.html" class="text-primary font-semibold">Gallery</a>
         <a href="interactive.html" class="hover:text-primary transition-colors">Interactive</a>
       </div>
@@ -42,8 +44,8 @@
         </svg>
       </button>
     </nav>
-    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-background shadow-md hidden sm:hidden">
-      <a href="overview.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Overview</a>
+    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-[rgba(245,235,220,0.92)] shadow-md hidden sm:hidden">
+
       <a href="gallery.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Gallery</a>
       <a href="interactive.html" class="block px-4 py-3 hover:bg-primary/5">Interactive</a>
     </div>
@@ -88,7 +90,6 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
       <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Your Name. All rights reserved.</p>
       <div class="space-x-4 mt-4 sm:mt-0">
-        <a href="overview.html" class="hover:text-primary transition-colors text-sm">Overview</a>
         <a href="gallery.html" class="text-primary font-semibold text-sm">Gallery</a>
         <a href="interactive.html" class="hover:text-primary transition-colors text-sm">Interactive</a>
       </div>

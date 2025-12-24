@@ -3,28 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Architecture Project – Home</title>
+  <title>Aura Valley – Home</title>
   <!-- Google Fonts for strong serif and modern grotesk typefaces -->
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
   <!-- Tailwind via CDN with custom theme -->
   <script>
     tailwind = window.tailwind || {};
+    // Define a warm, desert‑inspired palette used consistently across the site
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            background: '#f7f7f5',
-            primary: '#1f1f1f',
-            secondary: '#4a4a4a',
-            accent: '#8c8c8c'
+            background: '#f5ebdc',     // warm off‑white like gallery walls
+            primary:    '#5a4031',     // deep warm brown for titles
+            secondary:  '#7c6755',     // muted stone brown for body text
+            accent:     '#b78a60',     // sand/bronze accent for buttons and highlights
+            olive:      '#8c926d',     // subtle olive hint
+            glass:      'rgba(245, 235, 220, 0.8)' // warm translucent for glass panels
           },
           fontFamily: {
             serif: ['"Libre Baskerville"', 'serif'],
-            sans: ['"Inter"', 'sans-serif']
+            sans:  ['"Inter"', 'sans-serif']
           }
         }
       }
-    }
+    };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -40,13 +43,14 @@
     }
   </style>
 </head>
-<body class="bg-background text-secondary font-sans antialiased">
+<body class="  bg-[rgba(245,235,220,0.92)] text-secondary font-sans antialiased">
   <!-- Header navigation: minimal and always accessible -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur border-b border-secondary/10">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+  <!-- Home page navbar: matte glass with blur and subtle shadow -->
+<header class="fixed top-0 left-0 w-full z-50  bg-[rgba(245,235,220,0.92)]
+ border-b border-primary/10">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
       <a href="index.html" class="text-primary font-serif text-xl font-bold">Aura&nbsp;Valley</a>
       <div class="space-x-6 hidden sm:flex">
-        <a href="overview.html" class="hover:text-primary transition-colors">Overview</a>
         <a href="gallery.html" class="hover:text-primary transition-colors">Gallery</a>
         <a href="interactive.html" class="hover:text-primary transition-colors">Interactive</a>
       </div>
@@ -59,24 +63,59 @@
     </nav>
     <!-- Mobile navigation drawer -->
     <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-background shadow-md hidden sm:hidden">
-      <a href="overview.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Overview</a>
+    
       <a href="gallery.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Gallery</a>
       <a href="interactive.html" class="block px-4 py-3 hover:bg-primary/5">Interactive</a>
     </div>
   </header>
 
   <!-- Hero section with full bleed image and overlay -->
-  <section class="relative h-screen flex items-center justify-center text-center">
+  <section class="relative h-screen flex items-center justify-center text-center pt-20">
     <img src="images/hero-placeholder.jpg" alt="Hero placeholder" class="absolute inset-0 w-full h-full object-cover object-center" />
-    <!-- dark overlay to ensure readability -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-4 fade-enter" id="heroContent">
-      <h1 class="font-serif text-5xl md:text-6xl text-white mb-4">Aura Valley</h1>
-      <p class="font-sans text-lg md:text-xl text-gray-200 max-w-xl mx-auto">A concise subtitle that captures the essence of your architectural vision.</p>
+    <!-- subtle dark gradient overlay to improve contrast over varying images -->
+<div class="absolute inset-0
+            bg-gradient-to-b
+            from-black/25
+            via-black/10
+            to-[#f5ebdc]"></div>
+<div class="relative px-16 py-12 md:px-20 md:py-16 text-center">
+      <!-- Glass panel: static warm translucent card -->
+      <div class="absolute inset-0
+            bg-[rgba(245,235,220,0.92)]
+            backdrop-blur-2xl
+            rounded-2xl
+            border border-primary/20
+            shadow-xl"></div>
+
+        <!-- Content inside glass fades in -->
+        <div id="heroContent" class="fade-enter">
+<h1 class="font-serif text-5xl md:text-6xl text-[#2b2622] mb-4">
+  Aura&nbsp;Valley
+</h1>
+
+<p class="font-sans text-lg md:text-xl text-[#4a3a2f] max-w-xl mx-auto">
+  An environmentally responsive architecture shaped by light, air, and landscape.
+</p>
+
+<a href="interactive.html"
+   class="inline-block mt-6 px-8 py-3
+          border-2 border-[#2b2622]
+          text-[#2b2622] font-semibold
+          rounded-lg
+          hover:bg-[#2b2622]/10
+          transition">
+  Explore the Site
+</a>
+
+
+
+
+        </div>
+      </div>
     </div>
     <!-- Scroll cue -->
     <a href="#intro" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce" aria-label="Scroll down">
-      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
       </svg>
     </a>
@@ -85,19 +124,18 @@
   <!-- Introduction / concept summary section -->
   <section id="intro" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 space-y-12">
     <h2 class="text-3xl font-serif text-primary mb-6">Concept</h2>
-    <p class="text-lg leading-relaxed">Introduce your project with a clear statement of intent. Explain the driving concept behind the design, the context in which it exists, and the story you want visitors to follow. Keep the language accessible and engaging.</p>
+    <p class="text-lg leading-relaxed">The project is driven by a sustainability-first design approach that treats environmental performance as a core architectural generator rather than a secondary layer. The main intent is to reduce energy consumption while enhancing spatial comfort by working with natural forces instead of relying on mechanical systems. Building orientation was carefully considered to maximize natural daylight and encourage passive ventilation, shaping both the form and spatial organization of the project. Landscaping and afforestation are not treated as decorative elements, but as integral components of the architectural concept, contributing to shading, thermal regulation, and environmental quality. The project invites users to experience architecture as a responsive system where built form and nature operate together to create a balanced, climate-aware environment.</p>
     <h2 class="text-3xl font-serif text-primary mb-6">Location</h2>
-    <p class="text-lg leading-relaxed">Describe the site and its surroundings. What unique qualities define the place? How does your project respond to its physical and cultural context?</p>
+    <p class="text-lg leading-relaxed">The project is situated in a climate-sensitive context where solar exposure and heat accumulation are key environmental challenges. The site conditions informed a design response that prioritizes orientation, shading, and airflow as primary strategies. Extensive landscaping and afforestation were introduced to respond directly to the site’s climatic characteristics, reducing heat absorption and improving microclimatic conditions across the site. Rather than imposing a rigid form, the project adapts to its surroundings by using natural elements to mediate between built spaces and the external environment, creating a more comfortable and environmentally resilient setting.p>
     <h2 class="text-3xl font-serif text-primary mb-6">Program</h2>
-    <p class="text-lg leading-relaxed">Summarize the programmatic requirements – the functions, spaces, and relationships you were asked to design. Present them clearly, just like an architectural board would.</p>
+    <p class="text-lg leading-relaxed">The program is organized to support sustainable performance and environmental comfort through spatial planning. Spaces are arranged to benefit from optimal daylight exposure and natural ventilation, reducing the need for artificial lighting and cooling. The relationship between built areas and landscaped zones is carefully structured, allowing outdoor elements to actively support indoor environmental quality. Circulation and spatial connections are designed to reinforce this interaction between architecture and landscape, ensuring that sustainability strategies are embedded within the functional layout of the project rather than applied as afterthoughts.</p>
   </section>
 
   <!-- Footer with minimal information -->
   <footer class="border-t border-secondary/10 py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
-      <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+      <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Mohammed. All rights reserved.</p>
       <div class="space-x-4 mt-4 sm:mt-0">
-        <a href="overview.html" class="hover:text-primary transition-colors text-sm">Overview</a>
         <a href="gallery.html" class="hover:text-primary transition-colors text-sm">Gallery</a>
         <a href="interactive.html" class="hover:text-primary transition-colors text-sm">Interactive</a>
       </div>

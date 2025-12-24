@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Architecture Project – Interactive</title>
+  <title>Aura Valley – Interactive</title>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
   <script>
     tailwind = window.tailwind || {};
@@ -11,28 +11,61 @@
       theme: {
         extend: {
           colors: {
-            background: '#f7f7f5',
-            primary: '#1f1f1f',
-            secondary: '#4a4a4a',
-            accent: '#8c8c8c'
+            background: '#f7f0e6',
+            primary:    '#5a4031',
+            secondary:  '#7c6755',
+            accent:     '#b78a60',
+            olive:      '#8c926d',
+            glass:      'rgba(245, 235, 220, 0.8)'
           },
           fontFamily: {
             serif: ['"Libre Baskerville"', 'serif'],
-            sans: ['"Inter"', 'sans-serif']
+            sans:  ['"Inter"', 'sans-serif']
           }
         }
       }
     };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  .marker {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .marker-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: #5a4031;
+    border: 2px solid white;
+    flex-shrink: 0;
+  }
+
+  .marker-label {
+    background: rgba(245, 235, 220, 0.9);
+    backdrop-filter: blur(6px);
+    color: #5a4031;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(90, 64, 49, 0.18);
+    white-space: nowrap;
+  }
+</style>
+
 </head>
-<body class="bg-background text-secondary font-sans antialiased">
+<body class="bg-[rgba(245,235,220,0.92)] text-secondary font-sans antialiased">
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur border-b border-secondary/10">
+  <!-- Interior pages navbar: solid background, no blur -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[rgba(245,235,220,0.92)] border-b border-primary/10">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="index.html" class="text-primary font-serif text-xl font-bold">Project&nbsp;Title</a>
+      <a href="index.html" class="text-primary font-serif text-xl font-bold">Aura&nbsp;Valley</a>
       <div class="space-x-6 hidden sm:flex">
-        <a href="overview.html" class="hover:text-primary transition-colors">Overview</a>
         <a href="gallery.html" class="hover:text-primary transition-colors">Gallery</a>
         <a href="interactive.html" class="text-primary font-semibold">Interactive</a>
       </div>
@@ -42,8 +75,8 @@
         </svg>
       </button>
     </nav>
-    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-background shadow-md hidden sm:hidden">
-      <a href="overview.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Overview</a>
+    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-[rgba(245,235,220,0.92)] shadow-md hidden sm:hidden">
+      
       <a href="gallery.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Gallery</a>
       <a href="interactive.html" class="block px-4 py-3 hover:bg-primary/5">Interactive</a>
     </div>
@@ -57,12 +90,38 @@
         <!-- Site image with clickable markers -->
         <div class="relative w-full lg:w-1/2 overflow-hidden rounded-lg shadow">
           <img src="images/site-placeholder.jpg" alt="Site placeholder" class="w-full h-auto object-cover">
-          <!-- Marker 1 -->
-          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 30%; left: 25%;" data-plan-target="planContainer" aria-label="Show plan for zone 1"></button>
-          <!-- Marker 2 -->
-          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 50%; left: 60%;" data-plan-target="planContainer" aria-label="Show plan for zone 2"></button>
-          <!-- Marker 3 -->
-          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 75%; left: 40%;" data-plan-target="planContainer" aria-label="Show plan for zone 3"></button>
+         <!-- Marker 1 -->
+<button class="marker" style="top: 43%; left: 55%;"
+        data-plan-target="planContainer"
+        aria-label="Residential Zone">
+  <span class="marker-dot"></span>
+  <span class="marker-label">Residential Zone</span>
+</button>
+
+<!-- Marker 2 -->
+<button class="marker" style="top: 30%; left: 81%;"
+        data-plan-target="planContainer"
+        aria-label="Public Plaza">
+  <span class="marker-dot"></span>
+  <span class="marker-label">Public Plaza</span>
+</button>
+
+<!-- Marker 3 -->
+<button class="marker" style="top: 73%; left: 33%;"
+        data-plan-target="planContainer"
+        aria-label="Service Core">
+  <span class="marker-dot"></span>
+  <span class="marker-label">Service Core</span>
+</button>
+<!-- Marker 4 -->
+
+<button class="marker" style="top: 78%; left: 77%;"
+        data-plan-target="planContainer"
+        aria-label="Service Core">
+  <span class="marker-dot"></span>
+  <span class="marker-label">Service Core</span>
+</button>
+
         </div>
         <!-- Plan image with markers, hidden by default -->
         <div id="planContainer" class="relative w-full lg:w-1/2 overflow-hidden rounded-lg shadow hidden">
@@ -93,7 +152,6 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
       <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Your Name. All rights reserved.</p>
       <div class="space-x-4 mt-4 sm:mt-0">
-        <a href="overview.html" class="hover:text-primary transition-colors text-sm">Overview</a>
         <a href="gallery.html" class="hover:text-primary transition-colors text-sm">Gallery</a>
         <a href="interactive.html" class="text-primary font-semibold text-sm">Interactive</a>
       </div>
