@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Project – Interactive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#f7f7f5',
+            primary: '#1f1f1f',
+            secondary: '#4a4a4a',
+            accent: '#8c8c8c'
+          },
+          fontFamily: {
+            serif: ['"Libre Baskerville"', 'serif'],
+            sans: ['"Inter"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-background text-secondary font-sans antialiased">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur border-b border-secondary/10">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="index.html" class="text-primary font-serif text-xl font-bold">Project&nbsp;Title</a>
+      <div class="space-x-6 hidden sm:flex">
+        <a href="overview.html" class="hover:text-primary transition-colors">Overview</a>
+        <a href="gallery.html" class="hover:text-primary transition-colors">Gallery</a>
+        <a href="interactive.html" class="text-primary font-semibold">Interactive</a>
+      </div>
+      <button id="menuBtn" class="sm:hidden focus:outline-none" aria-label="Open menu">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-background shadow-md hidden sm:hidden">
+      <a href="overview.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Overview</a>
+      <a href="gallery.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Gallery</a>
+      <a href="interactive.html" class="block px-4 py-3 hover:bg-primary/5">Interactive</a>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-serif text-primary mb-4">Interactive Exploration</h1>
+      <p class="text-lg leading-relaxed mb-12">Navigate through the site and plan. Click on markers on the site to reveal the corresponding plan. Then click on plan markers to view photographs or renderings of those spaces. This interactive feature ensures visitors never encounter a dead‑end and always maintain context within your project.</p>
+      <div class="flex flex-col lg:flex-row gap-12">
+        <!-- Site image with clickable markers -->
+        <div class="relative w-full lg:w-1/2 overflow-hidden rounded-lg shadow">
+          <img src="images/site-placeholder.jpg" alt="Site placeholder" class="w-full h-auto object-cover">
+          <!-- Marker 1 -->
+          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 30%; left: 25%;" data-plan-target="planContainer" aria-label="Show plan for zone 1"></button>
+          <!-- Marker 2 -->
+          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 50%; left: 60%;" data-plan-target="planContainer" aria-label="Show plan for zone 2"></button>
+          <!-- Marker 3 -->
+          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 75%; left: 40%;" data-plan-target="planContainer" aria-label="Show plan for zone 3"></button>
+        </div>
+        <!-- Plan image with markers, hidden by default -->
+        <div id="planContainer" class="relative w-full lg:w-1/2 overflow-hidden rounded-lg shadow hidden">
+          <img src="images/plan-placeholder.jpg" alt="Plan placeholder" class="w-full h-auto object-cover">
+          <!-- Plan marker 1 to open gallery 1 -->
+          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 35%; left: 30%;" data-gallery="gallery1" aria-label="View images for area A"></button>
+          <!-- Plan marker 2 to open gallery 2 -->
+          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 60%; left: 65%;" data-gallery="gallery2" aria-label="View images for area B"></button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox for interactive page -->
+  <div id="lightbox" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden" role="dialog" aria-modal="true">
+    <div class="relative max-w-4xl w-full mx-4">
+      <button id="lightboxClose" class="absolute top-4 right-4 text-white bg-primary/50 hover:bg-primary/70 rounded-full p-2 focus:outline-none" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <img id="lightboxImage" src="" alt="Gallery view" class="w-full h-auto rounded-lg shadow-lg" />
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-secondary/10 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
+      <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+      <div class="space-x-4 mt-4 sm:mt-0">
+        <a href="overview.html" class="hover:text-primary transition-colors text-sm">Overview</a>
+        <a href="gallery.html" class="hover:text-primary transition-colors text-sm">Gallery</a>
+        <a href="interactive.html" class="text-primary font-semibold text-sm">Interactive</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/interactive.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

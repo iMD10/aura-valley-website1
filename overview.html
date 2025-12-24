@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Project – Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#f7f7f5',
+            primary: '#1f1f1f',
+            secondary: '#4a4a4a',
+            accent: '#8c8c8c'
+          },
+          fontFamily: {
+            serif: ['"Libre Baskerville"', 'serif'],
+            sans: ['"Inter"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-background text-secondary font-sans antialiased">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur border-b border-secondary/10">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="index.html" class="text-primary font-serif text-xl font-bold">Project&nbsp;Title</a>
+      <div class="space-x-6 hidden sm:flex">
+        <a href="overview.html" class="text-primary font-semibold">Overview</a>
+        <a href="gallery.html" class="hover:text-primary transition-colors">Gallery</a>
+        <a href="interactive.html" class="hover:text-primary transition-colors">Interactive</a>
+      </div>
+      <button id="menuBtn" class="sm:hidden focus:outline-none" aria-label="Open menu">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-background shadow-md hidden sm:hidden">
+      <a href="overview.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Overview</a>
+      <a href="gallery.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Gallery</a>
+      <a href="interactive.html" class="block px-4 py-3 hover:bg-primary/5">Interactive</a>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+      <section class="space-y-8">
+        <h1 class="text-4xl font-serif text-primary">Project Overview</h1>
+        <p class="text-lg leading-relaxed">Use this page to present your project the way you would on a competition board. Break your narrative into digestible sections with clear headings. Keep your tone professional yet accessible. Generous whitespace gives each element room to breathe, enhancing readability and focus【938584789814917†L82-L96】.</p>
+      </section>
+      <!-- Concept -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-serif text-primary">Concept</h2>
+        <p class="text-lg leading-relaxed">Detail the core idea driving your design. Explain the problem you addressed and how your concept offers a solution. Use concise language and avoid unnecessary jargon.</p>
+      </section>
+      <!-- Location -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-serif text-primary">Location</h2>
+        <p class="text-lg leading-relaxed">Describe the geographic and cultural context of your site. Highlight any constraints or opportunities that informed your design decisions.</p>
+      </section>
+      <!-- Program -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-serif text-primary">Program</h2>
+        <p class="text-lg leading-relaxed">Outline the functional program of your project. What spaces were required? How did you prioritize and organize them? Use bullet points or lists where appropriate to make information scannable【671955860208923†L103-L117】.</p>
+      </section>
+      <!-- Design Intent -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-serif text-primary">Design Intent</h2>
+        <p class="text-lg leading-relaxed">Discuss the intended experience of your design. What atmosphere are you creating? How do materiality, light and spatial organization contribute to your goals? Support your text with diagrams or sketches if desired.</p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-secondary/10 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
+      <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+      <div class="space-x-4 mt-4 sm:mt-0">
+        <a href="overview.html" class="text-primary font-semibold text-sm">Overview</a>
+        <a href="gallery.html" class="hover:text-primary transition-colors text-sm">Gallery</a>
+        <a href="interactive.html" class="hover:text-primary transition-colors text-sm">Interactive</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
