@@ -44,6 +44,14 @@
     border: 2px solid white;
     flex-shrink: 0;
   }
+  .marker-top {
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.marker-top .marker-label {
+  transform: translateY(-2px);
+}
 
   .marker-label {
     background: rgba(245, 235, 220, 0.9);
@@ -93,27 +101,28 @@
           
          <!-- Marker 1 -->
 <button class="marker"
-        style="top: 43%; left: 55%;"
+        style="top: 43%; left: 50%;"
         data-plan="halls"
         data-title="Halls">
   <span class="marker-dot"></span>
   <span class="marker-label">Halls</span>
 </button>
 
-<button class="marker"
+<button class="marker marker-top "
         style="top: 30%; left: 81%;"
         data-plan="large-company"
         data-title="Large Company">
-  <span class="marker-dot"></span>
-  <span class="marker-label">Large Company</span>
+        <span class="marker-label ">Large Company</span>
+  <span class="marker-dot "></span>
+  
 </button>
 
-<button class="marker"
-        style="top: 73%; left: 33%;"
+<button class="marker marker-top"
+        style="top: 70%; left: 28%;"
         data-plan="small-company"
         data-title="Small Company">
+        <span class="marker-label ">Small Company</span>
   <span class="marker-dot"></span>
-  <span class="marker-label">Small Company</span>
 </button>
 
 <button class="marker"
@@ -157,7 +166,9 @@
   </main>
 
   <!-- Lightbox for interactive page -->
-  <div id="lightbox" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden" role="dialog" aria-modal="true">
+  <div id="lightbox"
+     class="fixed inset-0 bg-black/80 flex items-center justify-center hidden z-[999]">
+
     <div class="relative max-w-4xl w-full mx-4">
       <button id="lightboxClose" class="absolute top-4 right-4 text-white bg-primary/50 hover:bg-primary/70 rounded-full p-2 focus:outline-none" aria-label="Close">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
