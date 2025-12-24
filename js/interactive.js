@@ -1,39 +1,101 @@
-// interactive.js
-// Handles interactions for the Interactive page: site markers, plan display and lightbox for plan markers.
-
 document.addEventListener('DOMContentLoaded', () => {
   const planContainer = document.getElementById('planContainer');
-  // Show plan when any site marker is clicked
-  document.querySelectorAll('[data-plan-target]').forEach(marker => {
+  const planTitle = document.getElementById('planTitle');
+  const planImage = document.getElementById('planImage');
+  const planGallery = document.getElementById('planGallery');
+
+  // Define plans and their images
+  const plans = {
+    halls: {
+      title: 'Halls',
+      planImage: 'images/plan-halls.jpg',
+      images: [
+        'images/gallery1.jpg',
+        'images/gallery2.jpg',
+        'images/gallery3.jpg',
+        'images/gallery4.jpg',
+        
+      ]
+    },
+    'large-company': {
+      title: 'Large Company',
+      planImage: 'images/plan-large-company.jpg',
+      images: [
+        'images/gallery9.jpg',
+        'images/gallery10.jpg',
+        'images/gallery11.jpg',
+      ]
+    },
+    'small-company': {
+      title: 'Small Company',
+      planImage: 'images/plan-small-company.jpg',
+      images: [
+        'images/gallery5.jpg',
+        'images/gallery6.jpg',
+        'images/gallery7.jpg',
+        'images/gallery8.jpg',
+      ]
+    },
+    residential: {
+      title: 'Residential',
+      planImage: 'images/plan-residential.jpg',
+      images: [
+        'images/gallery12.jpg',
+      ]
+    }
+  };
+
+  document.querySelectorAll('[data-plan]').forEach(marker => {
     marker.addEventListener('click', () => {
-      if (planContainer.classList.contains('hidden')) {
-        planContainer.classList.remove('hidden');
-        // On smaller screens, scroll plan into view for better context
-        planContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+      const key = marker.dataset.plan;
+      const plan = plans[key];
+
+      if (!plan) return;
+
+      // Show container
+      planContainer.classList.remove('hidden');
+
+      // Update title and plan
+      planTitle.textContent = plan.title;
+      planImage.src = plan.planImage;
+
+      // Build gallery
+      planGallery.innerHTML = '';
+      plan.images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className =
+          'w-full h-auto rounded-md shadow-sm object-cover cursor-pointer';
+        img.addEventListener('click', () => {
+          openLightbox(src);
+        });
+        planGallery.appendChild(img);
+      });
+
+      // Scroll into view on small screens
+      planContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
-  // Lightbox logic for plan markers
+  // Lightbox reuse
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightboxImage');
   const lightboxClose = document.getElementById('lightboxClose');
-  document.querySelectorAll('[data-gallery]').forEach(marker => {
-    marker.addEventListener('click', () => {
-      const galleryId = marker.getAttribute('data-gallery');
-      // Build path to placeholder image – expects files in images/ named like gallery1.jpg
-      lightboxImage.src = `images/${galleryId}.jpg`;
-      lightbox.classList.remove('hidden');
-    });
-  });
-  const closeLightbox = () => {
+
+  window.openLightbox = (src) => {
+    lightboxImage.src = src;
+    lightbox.classList.remove('hidden');
+  };
+
+  lightboxClose.addEventListener('click', () => {
     lightbox.classList.add('hidden');
     lightboxImage.src = '';
-  };
-  lightboxClose.addEventListener('click', closeLightbox);
+  });
+
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) {
-      closeLightbox();
+      lightbox.classList.add('hidden');
+      lightboxImage.src = '';
     }
   });
 });

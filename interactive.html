@@ -85,52 +85,72 @@
   <main class="pt-24 pb-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-serif text-primary mb-4">Interactive Exploration</h1>
-      <p class="text-lg leading-relaxed mb-12">Navigate through the site and plan. Click on markers on the site to reveal the corresponding plan. Then click on plan markers to view photographs or renderings of those spaces. This interactive feature ensures visitors never encounter a dead‑end and always maintain context within your project.</p>
+      <p class="text-lg leading-relaxed mb-12">Navigate through the site and plan. Click on markers on the site to reveal the corresponding plan.</p>
       <div class="flex flex-col lg:flex-row gap-12">
         <!-- Site image with clickable markers -->
         <div class="relative w-full lg:w-1/2 overflow-hidden rounded-lg shadow">
           <img src="images/site-placeholder.jpg" alt="Site placeholder" class="w-full h-auto object-cover">
          <!-- Marker 1 -->
-<button class="marker" style="top: 43%; left: 55%;"
-        data-plan-target="planContainer"
-        aria-label="Residential Zone">
+<button class="marker"
+        style="top: 43%; left: 55%;"
+        data-plan="halls"
+        data-title="Halls">
   <span class="marker-dot"></span>
-  <span class="marker-label">Residential Zone</span>
+  <span class="marker-label">Halls</span>
 </button>
 
-<!-- Marker 2 -->
-<button class="marker" style="top: 30%; left: 81%;"
-        data-plan-target="planContainer"
-        aria-label="Public Plaza">
+<button class="marker"
+        style="top: 30%; left: 81%;"
+        data-plan="large-company"
+        data-title="Large Company">
   <span class="marker-dot"></span>
-  <span class="marker-label">Public Plaza</span>
+  <span class="marker-label">Large Company</span>
 </button>
 
-<!-- Marker 3 -->
-<button class="marker" style="top: 73%; left: 33%;"
-        data-plan-target="planContainer"
-        aria-label="Service Core">
+<button class="marker"
+        style="top: 73%; left: 33%;"
+        data-plan="small-company"
+        data-title="Small Company">
   <span class="marker-dot"></span>
-  <span class="marker-label">Service Core</span>
+  <span class="marker-label">Small Company</span>
 </button>
-<!-- Marker 4 -->
 
-<button class="marker" style="top: 78%; left: 77%;"
-        data-plan-target="planContainer"
-        aria-label="Service Core">
+<button class="marker"
+        style="top: 78%; left: 77%;"
+        data-plan="residential"
+        data-title="Residential">
   <span class="marker-dot"></span>
-  <span class="marker-label">Service Core</span>
+  <span class="marker-label">Residential</span>
 </button>
+
 
         </div>
         <!-- Plan image with markers, hidden by default -->
-        <div id="planContainer" class="relative w-full lg:w-1/2 overflow-hidden rounded-lg shadow hidden">
-          <img src="images/plan-placeholder.jpg" alt="Plan placeholder" class="w-full h-auto object-cover">
-          <!-- Plan marker 1 to open gallery 1 -->
-          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 35%; left: 30%;" data-gallery="gallery1" aria-label="View images for area A"></button>
-          <!-- Plan marker 2 to open gallery 2 -->
-          <button class="absolute w-4 h-4 bg-primary rounded-full opacity-80 hover:opacity-100 focus:outline-none ring-2 ring-white transition" style="top: 60%; left: 65%;" data-gallery="gallery2" aria-label="View images for area B"></button>
-        </div>
+        <div id="planContainer"
+     class="w-full lg:w-1/2 space-y-6 hidden">
+
+  <!-- Plan title -->
+  <h2 id="planTitle"
+      class="text-2xl font-serif text-primary">
+    <!-- injected by JS -->
+  </h2>
+
+  <!-- Plan image -->
+  <div class="overflow-hidden rounded-lg shadow">
+    <img id="planImage"
+         src=""
+         alt="Plan"
+         class="w-full h-auto object-cover">
+  </div>
+
+  <!-- Plan gallery -->
+  <div id="planGallery"
+       class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+    <!-- injected by JS -->
+  </div>
+
+</div>
+
       </div>
     </div>
   </main>
@@ -150,7 +170,7 @@
   <!-- Footer -->
   <footer class="border-t border-secondary/10 py-8 mt-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
-      <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+      <p class="text-sm text-secondary/60">&copy; <span id="year"></span> Mohammed Al-Mutawa. All rights reserved.</p>
       <div class="space-x-4 mt-4 sm:mt-0">
         <a href="gallery.html" class="hover:text-primary transition-colors text-sm">Gallery</a>
         <a href="interactive.html" class="text-primary font-semibold text-sm">Interactive</a>
