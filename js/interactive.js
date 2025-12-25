@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'images/gallery6.jpg',
         'images/gallery7.jpg',
         'images/gallery8.jpg',
+        'images/gallery13.jpg',
+
       ]
     },
     residential: {
