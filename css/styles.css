@@ -399,13 +399,16 @@ img, video { display: block; max-width: 100%; }
   z-index: -2;
 }
 
-.hero-media img {
+.hero-media img,
+.hero-media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  animation: heroDrift 24s var(--ease-soft) forwards;
 }
+
+/* The still hero drifts; the film supplies its own motion. */
+.hero-media img { animation: heroDrift 24s var(--ease-soft) forwards; }
 
 /* A very slow push-in keeps the still image from feeling static. */
 @keyframes heroDrift {
@@ -443,11 +446,44 @@ img, video { display: block; max-width: 100%; }
   color: rgba(255, 255, 255, .72);
 }
 
+.hero-controls {
+  position: absolute;
+  right: clamp(1.25rem, 4vw, 3.5rem);
+  bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  z-index: 2;
+}
+
+/* Auto-playing footage needs a way to stop it (WCAG 2.2.2). */
+.media-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 999px;
+  background: rgba(20, 14, 10, .3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  transition: background .35s var(--ease), border-color .35s var(--ease),
+              transform .35s var(--ease);
+}
+
+.media-toggle:hover {
+  background: rgba(20, 14, 10, .55);
+  border-color: rgba(255, 255, 255, .7);
+  transform: translateY(-2px);
+}
+
 .scroll-cue {
   display: none;
-  position: absolute;
-  right: 3.5rem;
-  bottom: 1.75rem;
+  position: static;
   flex-direction: column;
   align-items: center;
   gap: .5rem;
@@ -478,6 +514,9 @@ img, video { display: block; max-width: 100%; }
 @media (min-width: 768px) {
   .scroll-cue { display: inline-flex; }
 }
+
+/* Keep the meta row clear of the controls column. */
+.hero-meta { padding-right: 4.5rem; }
 
 @keyframes cueTravel {
   0%   { transform: translateY(-100%); }
@@ -524,6 +563,13 @@ img, video { display: block; max-width: 100%; }
   transform: translateY(-4px);
   border-color: rgba(74, 52, 39, .22);
   box-shadow: 0 24px 48px -28px rgba(36, 28, 22, .38);
+}
+
+/* Card headings sit in narrow columns, so they run smaller than a section
+   heading to avoid three-line wraps in the four-across layout. */
+.card-title {
+  font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+  line-height: 1.2;
 }
 
 .card-num {
@@ -1069,6 +1115,7 @@ h1, h2, h3, p { margin: 0; }
 
 @media (min-width: 1024px) {
   .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* Type sitting on photography is always light. */

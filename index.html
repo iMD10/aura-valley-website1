@@ -10,14 +10,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Aura Valley — Environmentally Responsive Architecture</title>
-  <meta name="description" content="Aura Valley is an architectural graduation project by Mohammed Al-Mutawa, shaped by daylight, passive ventilation and afforestation.">
+  <meta name="description" content="Aura Valley is an architectural graduation project by Mohammed Al-Mutawa: an integrated community in north Riyadh combining work, living, culture and entertainment.">
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
   <link rel="icon" href="images/favicon.ico">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Aura Valley — Environmentally Responsive Architecture">
-  <meta property="og:description" content="Aura Valley is an architectural graduation project by Mohammed Al-Mutawa, shaped by daylight, passive ventilation and afforestation.">
+  <meta property="og:description" content="Aura Valley is an architectural graduation project by Mohammed Al-Mutawa: an integrated community in north Riyadh combining work, living, culture and entertainment.">
   <meta property="og:image" content="images/hero-placeholder.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#f4ece0">
@@ -76,8 +76,12 @@
        ==================================================================== -->
   <section class="hero">
     <div class="hero-media">
-      <img src="images/hero-placeholder.jpg" alt="Aura Valley seen across its landscaped setting"
-           fetchpriority="high" decoding="async">
+      <!-- The project film plays as the backdrop; the poster carries the hero
+           for reduced-motion visitors and anywhere the video cannot play. -->
+      <video data-hero-video autoplay muted loop playsinline preload="auto"
+             poster="images/hero-placeholder.jpg" aria-hidden="true" tabindex="-1">
+        <source src="media/graduation-project.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="hero-scrim"></div>
 
@@ -90,7 +94,7 @@
         </h1>
 
         <p class="lead mt-6 max-w-2xl" data-reveal data-reveal-delay="240">
-          An environmentally responsive architecture shaped by light, air and landscape.
+          A community where work, living, culture and entertainment share one ground.
         </p>
 
         <div class="flex flex-wrap gap-3 mt-9" data-reveal data-reveal-delay="360">
@@ -105,17 +109,30 @@
         </div>
 
         <div class="hero-meta" data-reveal data-reveal-delay="480">
-          <span>Passive ventilation</span>
-          <span>Daylight orientation</span>
-          <span>Afforestation &amp; shading</span>
+          <span>North Riyadh</span>
+          <span>396,000 m&sup2;</span>
+          <span>Four connected districts</span>
         </div>
       </div>
     </div>
 
-    <a href="#concept" class="scroll-cue" aria-label="Scroll to the project statement">
-      <span>Scroll</span>
-      <span class="scroll-cue-line"></span>
-    </a>
+    <div class="hero-controls">
+      <button class="media-toggle" type="button" data-hero-toggle
+              aria-label="Pause the background film">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-icon-pause>
+          <rect x="7" y="5" width="3.2" height="14" rx="1" />
+          <rect x="13.8" y="5" width="3.2" height="14" rx="1" />
+        </svg>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-icon-play hidden>
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </button>
+
+      <a href="#concept" class="scroll-cue" aria-label="Scroll to the project statement">
+        <span>Scroll</span>
+        <span class="scroll-cue-line"></span>
+      </a>
+    </div>
   </section>
 
   <!-- ====================================================================
@@ -125,21 +142,20 @@
     <div class="shell">
       <p class="eyebrow" data-reveal>The Project</p>
       <p class="font-display display-md mt-7 max-w-4xl" data-reveal data-reveal-delay="100">
-        Environmental performance is treated as a design generator — not a layer
-        applied after the fact.
+        Not a group of office buildings, but a complete community — designed to
+        improve the quality of life of the people who use it.
       </p>
       <p class="lead mt-7 max-w-3xl text-secondary" data-reveal data-reveal-delay="200">
-        Orientation, airflow and planting shape the form and organisation of the
-        project, reducing energy demand while making its spaces more comfortable
-        to inhabit.
+        Four districts, connected so that people can work, live, interact and
+        enjoy their daily lives inside one integrated environment.
       </p>
     </div>
   </section>
 
   <!-- ====================================================================
-       Editorial sections: concept, location, program
+       Editorial sections
        ==================================================================== -->
-  <section class="shell pb-section-tight">
+  <section class="shell">
 
     <article class="entry" data-reveal>
       <div class="entry-aside">
@@ -147,8 +163,8 @@
         <h2 class="font-display display-sm mt-3">Concept</h2>
       </div>
       <div class="prose max-w-2xl">
-        <p>The project is driven by a sustainability-first design approach that treats environmental performance as a core architectural generator rather than a secondary layer. The main intent is to reduce energy consumption while enhancing spatial comfort by working with natural forces instead of relying on mechanical systems.</p>
-        <p>Building orientation was carefully considered to maximize natural daylight and encourage passive ventilation, shaping both the form and spatial organization of the project. Landscaping and afforestation are not treated as decorative elements, but as integral components of the architectural concept, contributing to shading, thermal regulation, and environmental quality. The project invites users to experience architecture as a responsive system where built form and nature operate together to create a balanced, climate-aware environment.</p>
+        <p>The project aims to create an integrated environment that combines work, living, culture, and entertainment in one place. Rather than being just a group of office buildings, the project is designed as a complete community that improves the quality of life and provides a better experience for its users.</p>
+        <p>The project is divided into four main areas: large and regional companies, startups and small businesses, residential areas, and cultural and exhibition spaces. These areas are connected to create a balanced environment where people can work, live, interact, and enjoy their daily lives within one integrated community.</p>
       </div>
     </article>
 
@@ -158,56 +174,49 @@
         <h2 class="font-display display-sm mt-3">Location</h2>
       </div>
       <div class="prose max-w-2xl">
-        <p>The project is situated in a climate-sensitive context where solar exposure and heat accumulation are key environmental challenges. The site conditions informed a design response that prioritizes orientation, shading, and airflow as primary strategies.</p>
-        <p>Extensive landscaping and afforestation were introduced to respond directly to the site&rsquo;s climatic characteristics, reducing heat absorption and improving microclimatic conditions across the site. Rather than imposing a rigid form, the project adapts to its surroundings by using natural elements to mediate between built spaces and the external environment, creating a more comfortable and environmentally resilient setting.</p>
-      </div>
-    </article>
-
-    <article class="entry" data-reveal>
-      <div class="entry-aside">
-        <p class="entry-index">03</p>
-        <h2 class="font-display display-sm mt-3">Program</h2>
-      </div>
-      <div class="prose max-w-2xl">
-        <p>The program is organized to support sustainable performance and environmental comfort through spatial planning. Spaces are arranged to benefit from optimal daylight exposure and natural ventilation, reducing the need for artificial lighting and cooling.</p>
-        <p>The relationship between built areas and landscaped zones is carefully structured, allowing outdoor elements to actively support indoor environmental quality. Circulation and spatial connections are designed to reinforce this interaction between architecture and landscape, ensuring that sustainability strategies are embedded within the functional layout of the project rather than applied as afterthoughts.</p>
+        <p>The project is located in the north of Riyadh, at the intersection of King Salman Road and King Khalid Road. This strategic location provides easy access and strong connectivity to the main areas of the city. The total project area is approximately 396,000 square meters.</p>
       </div>
     </article>
 
   </section>
 
   <!-- ====================================================================
-       Strategies
+       The four districts
        ==================================================================== -->
   <section class="section--tight pb-section-tight">
     <div class="shell">
-      <p class="eyebrow" data-reveal>Strategies</p>
+      <p class="eyebrow" data-reveal>The Four Districts</p>
 
-      <div class="grid gap-5 mt-9 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-5 mt-9 sm:grid-cols-2 lg:grid-cols-4">
         <div class="card" data-reveal>
           <p class="card-num">01</p>
-          <h3 class="font-display display-sm mt-5">Orientation &amp; Daylight</h3>
+          <h3 class="font-display card-title mt-5">Large &amp; Regional Companies</h3>
           <p class="mt-3 text-sm leading-relaxed">
-            Massing is turned to capture usable daylight deep into the plan,
-            cutting the reliance on artificial lighting through the day.
+            Headquarters-scale workplaces anchoring the northern edge of the site.
           </p>
         </div>
 
-        <div class="card" data-reveal data-reveal-delay="120">
+        <div class="card" data-reveal data-reveal-delay="100">
           <p class="card-num">02</p>
-          <h3 class="font-display display-sm mt-5">Passive Ventilation</h3>
+          <h3 class="font-display card-title mt-5">Startups &amp; Small Businesses</h3>
           <p class="mt-3 text-sm leading-relaxed">
-            Spatial organisation encourages air to move through the building,
-            letting natural forces do the work of mechanical cooling.
+            Smaller, more flexible floorplates for young and growing companies.
           </p>
         </div>
 
-        <div class="card" data-reveal data-reveal-delay="240">
+        <div class="card" data-reveal data-reveal-delay="200">
           <p class="card-num">03</p>
-          <h3 class="font-display display-sm mt-5">Afforestation &amp; Shading</h3>
+          <h3 class="font-display card-title mt-5">Residential</h3>
           <p class="mt-3 text-sm leading-relaxed">
-            Planting is structural to the concept — moderating heat absorption
-            and improving the microclimate across the whole site.
+            Homes inside the community, so the site stays inhabited beyond office hours.
+          </p>
+        </div>
+
+        <div class="card" data-reveal data-reveal-delay="300">
+          <p class="card-num">04</p>
+          <h3 class="font-display card-title mt-5">Cultural &amp; Exhibition Spaces</h3>
+          <p class="mt-3 text-sm leading-relaxed">
+            The halls and public rooms where the four districts meet and mix.
           </p>
         </div>
       </div>
@@ -235,7 +244,7 @@
           <p class="eyebrow">Interactive</p>
           <h2 class="font-display display-sm mt-3">Walk the site plan</h2>
           <p class="feature-desc mt-2 max-w-sm">
-            Select a zone on the masterplan to open its floor plan and imagery.
+            Select a district on the masterplan to open its floor plan and imagery.
           </p>
         </a>
 
@@ -250,8 +259,8 @@
         <div>
           <a href="index.html" class="nav-brand">Aura&nbsp;Valley</a>
           <p class="mt-5 max-w-sm text-sm leading-relaxed">
-            An environmentally responsive architecture shaped by light, air and
-            landscape — where built form and planting work as a single climate system.
+            An integrated community in north Riyadh that brings work, living,
+            culture and entertainment together across four connected districts.
           </p>
 
           <div class="flex items-center gap-3 mt-7">
@@ -281,6 +290,17 @@
                 <circle cx="17" cy="7" r="1"></circle>
               </svg>
             </a>
+
+            <a href="https://www.linkedin.com/in/mohammed-almutawa-6239282b5" target="_blank" rel="noopener"
+               class="social" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                <line x1="7.6" y1="10.6" x2="7.6" y2="16.6"></line>
+                <circle cx="7.6" cy="7.5" r="0.9"></circle>
+                <line x1="11.6" y1="10.6" x2="11.6" y2="16.6"></line>
+                <path d="M11.6 13.3a2.2 2.2 0 0 1 4.4 0v3.3"></path>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -299,6 +319,7 @@
             <a href="mailto:m.almutawa.arch@gmail.com" class="footer-link">m.almutawa.arch@gmail.com</a>
             <a href="tel:+966555760889" class="footer-link">+966 55 576 0889</a>
             <a href="https://www.instagram.com/ar.m7mad.almutawa" target="_blank" rel="noopener" class="footer-link">@ar.m7mad.almutawa</a>
+            <a href="https://www.linkedin.com/in/mohammed-almutawa-6239282b5" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
           </div>
         </div>
 

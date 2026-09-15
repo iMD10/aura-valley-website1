@@ -121,6 +121,53 @@
   document.querySelectorAll('[data-fade-in]').forEach(window.auraFadeIn);
 
   /* ---------------------------------------------------------------------
+     Hero film. It plays muted behind the title; visitors who prefer reduced
+     motion get the poster frame instead, and anyone can stop it.
+     --------------------------------------------------------------------- */
+  const heroVideo  = document.querySelector('[data-hero-video]');
+  const heroToggle = document.querySelector('[data-hero-toggle]');
+
+  if (heroVideo && heroToggle) {
+    const iconPause = heroToggle.querySelector('[data-icon-pause]');
+    const iconPlay  = heroToggle.querySelector('[data-icon-play]');
+
+    const syncToggle = () => {
+      const playing = !heroVideo.paused && !heroVideo.ended;
+      iconPause.hidden = !playing;
+      iconPlay.hidden = playing;
+      heroToggle.setAttribute('aria-label',
+        playing ? 'Pause the background film' : 'Play the background film');
+    };
+
+    if (prefersReducedMotion) {
+      heroVideo.removeAttribute('autoplay');
+      heroVideo.pause();
+    }
+
+    heroToggle.addEventListener('click', () => {
+      if (heroVideo.paused) heroVideo.play().catch(() => {});
+      else heroVideo.pause();
+    });
+
+    heroVideo.addEventListener('play', syncToggle);
+    heroVideo.addEventListener('pause', syncToggle);
+
+    // Some browsers refuse autoplay outright; reflect whatever actually happened.
+    heroVideo.addEventListener('loadeddata', syncToggle, { once: true });
+
+    // With a <source> child the failure fires on the source, not the video.
+    // If the film cannot play at all the poster becomes the hero and the
+    // control would do nothing, so it is withdrawn.
+    const dropToggle = () => { heroToggle.hidden = true; };
+    heroVideo.addEventListener('error', dropToggle, { once: true });
+    heroVideo.querySelectorAll('source').forEach((src) => {
+      src.addEventListener('error', dropToggle, { once: true });
+    });
+
+    syncToggle();
+  }
+
+  /* ---------------------------------------------------------------------
      Footer year.
      --------------------------------------------------------------------- */
   document.querySelectorAll('[data-year]').forEach((el) => {
