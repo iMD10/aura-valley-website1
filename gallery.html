@@ -63,6 +63,20 @@
       <h1 class="text-4xl font-serif text-primary mb-12">Gallery</h1>
       <!-- Gallery grid with consistent aspect ratios -->
       <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Gallery item: project video -->
+        <button class="relative group" data-gallery-video="media/graduation-project.mp4" aria-label="Play project video">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-lg shadow-sm bg-primary/10">
+            <video src="media/graduation-project.mp4#t=0.1" muted playsinline preload="metadata" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"></video>
+          </div>
+          <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span class="bg-primary/60 group-hover:bg-primary/75 transition-colors rounded-full p-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+          </span>
+          <span class="absolute bottom-3 left-3 px-2 py-1 rounded bg-primary/60 text-white text-xs uppercase tracking-wide pointer-events-none">Video</span>
+        </button>
         <!-- Gallery item 1 -->
         <button class="relative group" data-gallery="gallery1">
           <div class="aspect-[4/3] w-full overflow-hidden rounded-lg shadow-sm">
@@ -152,6 +166,7 @@
         </svg>
       </button>
       <img id="lightboxImage" src="" alt="Gallery full view" class="w-full h-auto rounded-lg shadow-lg" />
+      <video id="lightboxVideo" src="" controls playsinline class="w-full h-auto rounded-lg shadow-lg hidden"></video>
     </div>
   </div>
 
@@ -228,24 +243,47 @@
     // Gallery lightbox logic
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxVideo = document.getElementById('lightboxVideo');
     const lightboxClose = document.getElementById('lightboxClose');
-    const galleryButtons = document.querySelectorAll('[data-gallery]');
+    const galleryButtons = document.querySelectorAll('[data-gallery], [data-gallery-video]');
+
+    const closeLightbox = () => {
+      lightbox.classList.add('hidden');
+      lightboxVideo.pause();
+      lightboxVideo.removeAttribute('src');
+      lightboxVideo.load();
+      lightboxVideo.classList.add('hidden');
+      lightboxImage.src = '';
+      lightboxImage.classList.add('hidden');
+    };
+
     galleryButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const img = btn.querySelector('img');
-        lightboxImage.src = img.src;
-        lightbox.classList.remove('hidden');
+        const videoSrc = btn.dataset.galleryVideo;
+        if (videoSrc) {
+          lightboxImage.classList.add('hidden');
+          lightboxVideo.src = videoSrc;
+          lightboxVideo.classList.remove('hidden');
+          lightbox.classList.remove('hidden');
+          lightboxVideo.play().catch(() => {});
+        } else {
+          lightboxVideo.classList.add('hidden');
+          lightboxImage.src = btn.querySelector('img').src;
+          lightboxImage.classList.remove('hidden');
+          lightbox.classList.remove('hidden');
+        }
       });
     });
-    lightboxClose.addEventListener('click', () => {
-      lightbox.classList.add('hidden');
-      lightboxImage.src = '';
-    });
+    lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => {
-      // Close when clicking outside the image
+      // Close when clicking outside the image or video
       if (e.target === lightbox) {
-        lightbox.classList.add('hidden');
-        lightboxImage.src = '';
+        closeLightbox();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+        closeLightbox();
       }
     });
     document.getElementById('year').textContent = new Date().getFullYear();
