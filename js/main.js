@@ -1,13 +1,129 @@
 // main.js
-// Handles reusable behaviours across pages, such as mobile navigation.
+// Behaviour shared by every page: the navigation bar, the mobile drawer,
+// scroll-triggered reveals and a few small progressive enhancements.
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Mobile menu toggling
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+(() => {
+  'use strict';
+
+  const prefersReducedMotion =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------------------------------------------------------------
+     Navigation: frost the bar once the page leaves the top.
+     --------------------------------------------------------------------- */
+  const nav = document.querySelector('[data-nav]');
+
+  if (nav) {
+    const SCROLLED_AT = 24;
+    let ticking = false;
+
+    const syncNav = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > SCROLLED_AT);
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(syncNav);
+    }, { passive: true });
+
+    syncNav();
+  }
+
+  /* ---------------------------------------------------------------------
+     Mobile drawer.
+     --------------------------------------------------------------------- */
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const drawer = document.querySelector('[data-nav-drawer]');
+
+  if (toggle && drawer) {
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('is-locked', open);
+      // The bar is over the cream panel while the drawer is open, so it drops
+      // its light-on-photography treatment.
+      if (nav) nav.classList.toggle('is-menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      setDrawer(!drawer.classList.contains('is-open'));
+    });
+
+    // Close on navigation, on Escape, and when the viewport grows past the
+    // breakpoint where the drawer no longer exists.
+    drawer.querySelectorAll('a').forEach((link, i) => {
+      link.style.setProperty('--i', i);
+      link.addEventListener('click', () => setDrawer(false));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        setDrawer(false);
+        toggle.focus();
+      }
+    });
+
+    window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+      if (e.matches) setDrawer(false);
     });
   }
-});
+
+  /* ---------------------------------------------------------------------
+     Scroll reveal. Elements marked [data-reveal] fade up once, the first
+     time they enter the viewport.
+     --------------------------------------------------------------------- */
+  const revealables = document.querySelectorAll('[data-reveal]');
+
+  if (revealables.length) {
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealables.forEach((el) => el.classList.add('is-revealed'));
+    } else {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+
+      revealables.forEach((el) => {
+        const delay = el.dataset.revealDelay;
+        if (delay) el.style.setProperty('--reveal-delay', `${delay}ms`);
+
+        // Anything already on screen animates in straight away. Observing it
+        // instead would strand elements sitting against the bottom edge, which
+        // never satisfy the negative root margin until the page scrolls.
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          requestAnimationFrame(() => el.classList.add('is-revealed'));
+        } else {
+          observer.observe(el);
+        }
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Fade media in once it has actually decoded. The project photography is
+     large, so without this the tiles pop in abruptly.
+     --------------------------------------------------------------------- */
+  window.auraFadeIn = (el) => {
+    if (!el) return;
+    el.classList.add('media-fade');
+    const done = () => el.classList.add('is-loaded');
+    if (el.complete || el.readyState >= 2) done();
+    else el.addEventListener(el.tagName === 'VIDEO' ? 'loadeddata' : 'load', done, { once: true });
+    el.addEventListener('error', done, { once: true });
+  };
+
+  document.querySelectorAll('[data-fade-in]').forEach(window.auraFadeIn);
+
+  /* ---------------------------------------------------------------------
+     Footer year.
+     --------------------------------------------------------------------- */
+  document.querySelectorAll('[data-year]').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
+})();

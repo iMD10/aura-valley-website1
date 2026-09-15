@@ -1,103 +1,105 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const planContainer = document.getElementById('planContainer');
-  const planTitle = document.getElementById('planTitle');
-  const planImage = document.getElementById('planImage');
-  const planGallery = document.getElementById('planGallery');
+// interactive.js
+// Masterplan hotspots: choosing a marker reveals that zone's floor plan and
+// the imagery belonging to it, all of which opens in the shared lightbox.
 
-  // Define plans and their images
+document.addEventListener('DOMContentLoaded', () => {
+  const panel = document.querySelector('[data-plan-panel]');
+  if (!panel) return;
+
+  const titleEl  = panel.querySelector('[data-plan-title]');
+  const imageEl  = panel.querySelector('[data-plan-image]');
+  const thumbsEl = panel.querySelector('[data-plan-thumbs]');
+  const hintEl   = document.querySelector('[data-plan-hint]');
+  const markers  = Array.from(document.querySelectorAll('[data-plan]'));
+
+  // Assets are named, not pathed: `web` is the in-page render, `large` the
+  // full-size view the lightbox opens.
+  const web   = (name) => `images/web/${name}.jpg`;
+  const large = (name) => `images/large/${name}.jpg`;
+
   const plans = {
     halls: {
       title: 'Halls',
-      planImage: 'images/plan-halls.jpg',
-      images: [
-        'images/gallery1.jpg',
-        'images/gallery2.jpg',
-        'images/gallery3.jpg',
-        'images/gallery4.jpg',
-        
-      ]
+      plan: 'plan-halls',
+      images: ['gallery1', 'gallery2', 'gallery3', 'gallery4']
     },
     'large-company': {
       title: 'Large Company',
-      planImage: 'images/plan-large-company.jpg',
-      images: [
-        'images/gallery9.jpg',
-        'images/gallery10.jpg',
-        'images/gallery11.jpg',
-      ]
+      plan: 'plan-large-company',
+      images: ['gallery9', 'gallery10', 'gallery11']
     },
     'small-company': {
       title: 'Small Company',
-      planImage: 'images/plan-small-company.jpg',
-      images: [
-        'images/gallery5.jpg',
-        'images/gallery6.jpg',
-        'images/gallery7.jpg',
-        'images/gallery8.jpg',
-        'images/gallery13.jpg',
-
-      ]
+      plan: 'plan-small-company',
+      images: ['gallery5', 'gallery6', 'gallery7', 'gallery8', 'gallery13']
     },
     residential: {
       title: 'Residential',
-      planImage: 'images/plan-residential.jpg',
-      images: [
-        'images/gallery12.jpg',
-      ]
+      plan: 'plan-residential',
+      images: ['gallery12']
     }
   };
 
-  document.querySelectorAll('[data-plan]').forEach(marker => {
-    marker.addEventListener('click', () => {
-      const key = marker.dataset.plan;
-      const plan = plans[key];
+  const buildThumbs = (plan) => {
+    // Lightbox items are the floor plan followed by every view of the zone,
+    // so the arrow keys walk the whole set.
+    const items = [{ type: 'image', src: large(plan.plan), caption: `${plan.title} — plan` }]
+      .concat(plan.images.map((name, i) => ({
+        type: 'image', src: large(name), caption: `${plan.title} — view ${i + 1}`
+      })));
 
+    thumbsEl.innerHTML = '';
+
+    plan.images.forEach((name, i) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'tile';
+      button.setAttribute('aria-label', `Open ${plan.title} view ${i + 1}`);
+
+      const frame = document.createElement('span');
+      frame.className = 'tile-frame';
+
+      const img = document.createElement('img');
+      img.src = web(name);
+      img.alt = `${plan.title} — view ${i + 1}`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      window.auraFadeIn(img);
+
+      const veil = document.createElement('span');
+      veil.className = 'tile-veil';
+
+      frame.append(img, veil);
+      button.appendChild(frame);
+      button.addEventListener('click', () => window.AuraLightbox.open(items, i + 1));
+      thumbsEl.appendChild(button);
+    });
+
+    return items;
+  };
+
+  markers.forEach((marker) => {
+    marker.addEventListener('click', () => {
+      const plan = plans[marker.dataset.plan];
       if (!plan) return;
 
-      // Show container
-      planContainer.classList.remove('hidden');
+      markers.forEach((m) => m.classList.toggle('is-active', m === marker));
 
-      // Update title and plan
-      planTitle.textContent = plan.title;
-      planImage.src = plan.planImage;
+      titleEl.textContent = plan.title;
+      imageEl.src = web(plan.plan);
+      imageEl.alt = `${plan.title} floor plan`;
+      window.auraFadeIn(imageEl);
 
-      // Build gallery
-      planGallery.innerHTML = '';
-      plan.images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.className =
-          'w-full h-auto rounded-md shadow-sm object-cover cursor-pointer';
-        img.addEventListener('click', () => {
-          openLightbox(src);
-        });
-        planGallery.appendChild(img);
-      });
+      const items = buildThumbs(plan);
+      imageEl.onclick = () => window.AuraLightbox.open(items, 0);
+      imageEl.style.cursor = 'zoom-in';
 
-      // Scroll into view on small screens
-      planContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (hintEl) hintEl.hidden = true;
+      panel.hidden = false;
+
+      // Let the panel paint before animating it in.
+      requestAnimationFrame(() => panel.classList.add('is-visible'));
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  });
-
-  // Lightbox reuse
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightboxImage');
-  const lightboxClose = document.getElementById('lightboxClose');
-
-  window.openLightbox = (src) => {
-    lightboxImage.src = src;
-    lightbox.classList.remove('hidden');
-  };
-
-  lightboxClose.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
-    lightboxImage.src = '';
-  });
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      lightbox.classList.add('hidden');
-      lightboxImage.src = '';
-    }
   });
 });
