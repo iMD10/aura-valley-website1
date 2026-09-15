@@ -8,225 +8,336 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aura Valley — Environmentally Responsive Architecture</title>
+  <meta name="description" content="Aura Valley is an architectural graduation project by Mohammed Al-Mutawa: an integrated community in north Riyadh combining work, living, culture and entertainment.">
+
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
   <link rel="icon" href="images/favicon.ico">
 
-  <title>Aura Valley – Home</title>
-  <!-- Google Fonts for strong serif and modern grotesk typefaces -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <!-- Tailwind via CDN with custom theme -->
-  <script>
-    tailwind = window.tailwind || {};
-    // Define a warm, desert‑inspired palette used consistently across the site
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            background: '#f5ebdc',     // warm off‑white like gallery walls
-            primary:    '#5a4031',     // deep warm brown for titles
-            secondary:  '#7c6755',     // muted stone brown for body text
-            accent:     '#b78a60',     // sand/bronze accent for buttons and highlights
-            olive:      '#8c926d',     // subtle olive hint
-            glass:      'rgba(245, 235, 220, 0.8)' // warm translucent for glass panels
-          },
-          fontFamily: {
-            serif: ['"Libre Baskerville"', 'serif'],
-            sans:  ['"Inter"', 'sans-serif']
-          }
-        }
-      }
-    };
-  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Aura Valley — Environmentally Responsive Architecture">
+  <meta property="og:description" content="Aura Valley is an architectural graduation project by Mohammed Al-Mutawa: an integrated community in north Riyadh combining work, living, culture and entertainment.">
+  <meta property="og:image" content="images/hero-placeholder.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f4ece0">
+
+  <!-- Typefaces: a modern high-contrast serif for display, Inter for the rest.
+       Self-hosted, so there is no third-party request on the critical path. -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="fonts/instrument-serif-normal-400-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="fonts/inter-normal-300700-latin.woff2">
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <link rel="stylesheet" href="css/styles.css">
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-66W67LRR00"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-66W67LRR00');
-</script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-66W67LRR00"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-66W67LRR00');
+  </script>
   <script defer src="/_vercel/analytics/script.js"></script>
-
-  <style>
-    /* Basic fade‑in animation used across pages */
-    .fade-enter {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-enter-active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
 </head>
-<body class="  bg-[rgba(245,235,220,0.92)] text-secondary font-sans antialiased">
-  <!-- Header navigation: minimal and always accessible -->
-  <!-- Home page navbar: matte glass with blur and subtle shadow -->
-<header class="fixed top-0 left-0 w-full z-50  bg-[rgba(245,235,220,0.92)]
- border-b border-primary/10">
-      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <a href="index.html" class="text-primary font-serif text-xl font-bold">Aura&nbsp;Valley</a>
-      <div class="space-x-6 hidden sm:flex">
-        <a href="gallery.html" class="hover:text-primary transition-colors">Gallery</a>
-        <a href="interactive.html" class="hover:text-primary transition-colors">Interactive</a>
-      </div>
-      <!-- Mobile menu button -->
-      <button id="menuBtn" class="sm:hidden focus:outline-none" aria-label="Open menu">
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+
+<body class="bg-background text-secondary font-sans antialiased">
+
+  <header class="nav nav--over-hero" data-nav>
+    <div class="shell-wide nav-inner">
+      <a href="index.html" class="nav-brand">Aura&nbsp;Valley</a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html" class="nav-link is-active">Home</a>
+        <a href="gallery.html" class="nav-link ">Gallery</a>
+        <a href="interactive.html" class="nav-link ">Interactive</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" data-nav-toggle
+              aria-expanded="false" aria-controls="navDrawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
       </button>
-    </nav>
-    <!-- Mobile navigation drawer -->
-    <div id="mobileMenu" class="absolute top-16 left-0 w-full bg-[rgba(245,235,220,0.92)] shadow-md hidden sm:hidden">
-    
-      <a href="gallery.html" class="block px-4 py-3 border-b border-secondary/10 hover:bg-primary/5">Gallery</a>
-      <a href="interactive.html" class="block px-4 py-3 hover:bg-primary/5">Interactive</a>
     </div>
   </header>
 
-  <!-- Hero section with full bleed image and overlay -->
-  <section class="relative h-screen flex items-center justify-center text-center pt-20">
-    <img src="images/hero-placeholder.jpg" alt="Hero placeholder" class="absolute inset-0 w-full h-full object-cover object-center" />
-    <!-- subtle dark gradient overlay to improve contrast over varying images -->
-<div class="absolute inset-0
-            bg-gradient-to-b
-            from-black/25
-            via-black/10
-            to-[#f5ebdc]"></div>
-<div class="relative px-16 py-12 md:px-20 md:py-16 text-center">
-      <!-- Glass panel: static warm translucent card -->
-      <div class="absolute inset-0
-  bg-[rgba(245,235,220,0.70)]
-  backdrop-blur-sm
-  rounded-2xl
-  
-  shadow-lg">
-</div>
+  <!-- Full-screen drawer for small viewports -->
+  <div class="nav-drawer" id="navDrawer" data-nav-drawer>
+    <div class="shell">
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="interactive.html">Interactive</a>
+    </div>
+  </div>
 
+  <!-- ====================================================================
+       Hero
+       ==================================================================== -->
+  <section class="hero">
+    <div class="hero-media">
+      <!-- The project film plays as the backdrop; the poster carries the hero
+           for reduced-motion visitors and anywhere the video cannot play. -->
+      <video data-hero-video autoplay muted loop playsinline preload="auto"
+             poster="images/hero-placeholder.jpg" aria-hidden="true" tabindex="-1">
+        <source src="media/graduation-project.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-scrim"></div>
 
-        <!-- Content inside glass fades in -->
-        <div id="heroContent" class="fade-enter">
-<h1 class="font-serif text-5xl md:text-6xl text-[#2b2622] mb-4">
-  Aura&nbsp;Valley
-</h1>
+    <div class="shell-wide">
+      <div class="hero-content">
+        <p class="eyebrow" data-reveal>Architectural Graduation Project</p>
 
-<p class="font-sans text-lg md:text-xl text-[#4a3a2f] max-w-xl mx-auto">
-  An environmentally responsive architecture shaped by light, air, and landscape.
-</p>
+        <h1 class="font-display display-xl mt-6" data-reveal data-reveal-delay="120">
+          Aura&nbsp;Valley
+        </h1>
 
-<a href="interactive.html"
-   class="inline-block mt-6 px-8 py-3
-          border-2 border-[#2b2622]
-          text-[#2b2622] font-semibold
-          rounded-lg
-          hover:bg-[#2b2622]/10
-          transition">
-  Explore the Site
-</a>
+        <p class="lead mt-6 max-w-2xl" data-reveal data-reveal-delay="240">
+          A community where work, living, culture and entertainment share one ground.
+        </p>
 
+        <div class="flex flex-wrap gap-3 mt-9" data-reveal data-reveal-delay="360">
+          <a href="interactive.html" class="btn btn-light">
+            Explore the site
+            <svg class="btn-arrow w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 12h15m0 0-6-6m6 6-6 6" />
+            </svg>
+          </a>
+          <a href="gallery.html" class="btn btn-light">View the gallery</a>
+        </div>
 
-
-
+        <div class="hero-meta" data-reveal data-reveal-delay="480">
+          <span>North Riyadh</span>
+          <span>396,000 m&sup2;</span>
+          <span>Four connected districts</span>
         </div>
       </div>
     </div>
-    <!-- Scroll cue -->
-    <a href="#intro" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce" aria-label="Scroll down">
-      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
-      </svg>
-    </a>
-  </section>
 
-  <!-- Introduction / concept summary section -->
-  <section id="intro" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 space-y-12">
-    <h2 class="text-3xl font-serif text-primary mb-6">Concept</h2>
-    <p class="text-lg leading-relaxed">The project is driven by a sustainability-first design approach that treats environmental performance as a core architectural generator rather than a secondary layer. The main intent is to reduce energy consumption while enhancing spatial comfort by working with natural forces instead of relying on mechanical systems. Building orientation was carefully considered to maximize natural daylight and encourage passive ventilation, shaping both the form and spatial organization of the project. Landscaping and afforestation are not treated as decorative elements, but as integral components of the architectural concept, contributing to shading, thermal regulation, and environmental quality. The project invites users to experience architecture as a responsive system where built form and nature operate together to create a balanced, climate-aware environment.</p>
-    <h2 class="text-3xl font-serif text-primary mb-6">Location</h2>
-    <p class="text-lg leading-relaxed">The project is situated in a climate-sensitive context where solar exposure and heat accumulation are key environmental challenges. The site conditions informed a design response that prioritizes orientation, shading, and airflow as primary strategies. Extensive landscaping and afforestation were introduced to respond directly to the site’s climatic characteristics, reducing heat absorption and improving microclimatic conditions across the site. Rather than imposing a rigid form, the project adapts to its surroundings by using natural elements to mediate between built spaces and the external environment, creating a more comfortable and environmentally resilient setting.</p>
-    <h2 class="text-3xl font-serif text-primary mb-6">Program</h2>
-    <p class="text-lg leading-relaxed">The program is organized to support sustainable performance and environmental comfort through spatial planning. Spaces are arranged to benefit from optimal daylight exposure and natural ventilation, reducing the need for artificial lighting and cooling. The relationship between built areas and landscaped zones is carefully structured, allowing outdoor elements to actively support indoor environmental quality. Circulation and spatial connections are designed to reinforce this interaction between architecture and landscape, ensuring that sustainability strategies are embedded within the functional layout of the project rather than applied as afterthoughts.</p>
-  </section>
-
-  <!-- Footer with minimal information -->
-<footer class="border-t border-secondary/10 py-8 mt-16">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-    <!-- TOP ROW: icons + nav -->
-    <div class="flex items-center justify-between">
-
-      <!-- Contact icons (LEFT) -->
-      <div class="flex items-center gap-5 text-secondary">
-        <!-- Email -->
-         <a href="mailto:m.almutawa.arch@gmail.com" class="hover:text-primary transition-colors" aria-label="Email">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M21.75 6.75v10.5A2.25 2.25 0 0 1 19.5 19.5H4.5A2.25 2.25 0 0 1 2.25 17.25V6.75
-               M21.75 6.75A2.25 2.25 0 0 0 19.5 4.5H4.5A2.25 2.25 0 0 0 2.25 6.75
-               m19.5 0L12 13.5 2.25 6.75" />
+    <div class="hero-controls">
+      <button class="media-toggle" type="button" data-hero-toggle
+              aria-label="Pause the background film">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-icon-pause>
+          <rect x="7" y="5" width="3.2" height="14" rx="1" />
+          <rect x="13.8" y="5" width="3.2" height="14" rx="1" />
         </svg>
-      </a>
-
-      <a href="tel:+966555760889" class="hover:text-primary transition-colors" aria-label="Phone">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M2.25 6.75A2.25 2.25 0 0 1 4.5 4.5h2.086c.51 0 .96.343 1.09.835l.723 2.708a1.125 1.125 0 0 1-.417 1.222l-1.293.97
-               a11.04 11.04 0 0 0 5.318 5.318l.97-1.293a1.125 1.125 0 0 1 1.222-.417l2.708.723c.492.13.835.58.835 1.09V18
-               a2.25 2.25 0 0 1-2.25 2.25H18C9.716 20.25 2.25 12.784 2.25 4.5z" />
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-icon-play hidden>
+          <path d="M8 5v14l11-7z" />
         </svg>
+      </button>
+
+      <a href="#concept" class="scroll-cue" aria-label="Scroll to the project statement">
+        <span>Scroll</span>
+        <span class="scroll-cue-line"></span>
       </a>
-
-      <a href="https://www.instagram.com/ar.m7mad.almutawa" target="_blank" rel="noopener"
-         class="hover:text-primary transition-colors" aria-label="Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
-          <circle cx="12" cy="12" r="4"></circle>
-          <circle cx="17" cy="7" r="1"></circle>
-        </svg>
-      </a>
-      </div>
-
-      <!-- Footer navigation (RIGHT) -->
-      <div class="space-x-4 text-sm">
-        <a href="gallery.html" class="hover:text-primary">Gallery</a>
-        <a href="interactive.html" class="hover:text-primary">Interactive</a>
-      </div>
-
     </div>
+  </section>
 
-    <!-- BOTTOM ROW -->
-    <div class="mt-6">
-      <p class="text-sm text-secondary/60 text-center">
-        © <span id="year"></span> Mohammed Al-Mutawa. All rights reserved.
+  <!-- ====================================================================
+       Opening statement
+       ==================================================================== -->
+  <section class="section pb-none" id="concept">
+    <div class="shell">
+      <p class="eyebrow" data-reveal>The Project</p>
+      <p class="font-display display-md mt-7 max-w-4xl" data-reveal data-reveal-delay="100">
+        Not a group of office buildings, but a complete community — designed to
+        improve the quality of life of the people who use it.
       </p>
-      <p class="text-xs text-secondary/40 mt-1 text-center">
-        Interactive website developed by
-        <a href="https://imd10.github.io/Portfolio"
-          target="_blank" rel="noopener"
-          class="hover:text-secondary/60 transition-colors">
-          iMD10
+      <p class="lead mt-7 max-w-3xl text-secondary" data-reveal data-reveal-delay="200">
+        Four districts, connected so that people can work, live, interact and
+        enjoy their daily lives inside one integrated environment.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Editorial sections
+       ==================================================================== -->
+  <section class="shell">
+
+    <article class="entry" data-reveal>
+      <div class="entry-aside">
+        <p class="entry-index">01</p>
+        <h2 class="font-display display-sm mt-3">Concept</h2>
+      </div>
+      <div class="prose max-w-2xl">
+        <p>The project aims to create an integrated environment that combines work, living, culture, and entertainment in one place. Rather than being just a group of office buildings, the project is designed as a complete community that improves the quality of life and provides a better experience for its users.</p>
+        <p>The project is divided into four main areas: large and regional companies, startups and small businesses, residential areas, and cultural and exhibition spaces. These areas are connected to create a balanced environment where people can work, live, interact, and enjoy their daily lives within one integrated community.</p>
+      </div>
+    </article>
+
+    <article class="entry" data-reveal>
+      <div class="entry-aside">
+        <p class="entry-index">02</p>
+        <h2 class="font-display display-sm mt-3">Location</h2>
+      </div>
+      <div class="prose max-w-2xl">
+        <p>The project is located in the north of Riyadh, at the intersection of King Salman Road and King Khalid Road. This strategic location provides easy access and strong connectivity to the main areas of the city. The total project area is approximately 396,000 square meters.</p>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ====================================================================
+       The four districts
+       ==================================================================== -->
+  <section class="section--tight pb-section-tight">
+    <div class="shell">
+      <p class="eyebrow" data-reveal>The Four Districts</p>
+
+      <div class="grid gap-5 mt-9 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="card" data-reveal>
+          <p class="card-num">01</p>
+          <h3 class="font-display card-title mt-5">Large &amp; Regional Companies</h3>
+          <p class="mt-3 text-sm leading-relaxed">
+            Headquarters-scale workplaces anchoring the northern edge of the site.
+          </p>
+        </div>
+
+        <div class="card" data-reveal data-reveal-delay="100">
+          <p class="card-num">02</p>
+          <h3 class="font-display card-title mt-5">Startups &amp; Small Businesses</h3>
+          <p class="mt-3 text-sm leading-relaxed">
+            Smaller, more flexible floorplates for young and growing companies.
+          </p>
+        </div>
+
+        <div class="card" data-reveal data-reveal-delay="200">
+          <p class="card-num">03</p>
+          <h3 class="font-display card-title mt-5">Residential</h3>
+          <p class="mt-3 text-sm leading-relaxed">
+            Homes inside the community, so the site stays inhabited beyond office hours.
+          </p>
+        </div>
+
+        <div class="card" data-reveal data-reveal-delay="300">
+          <p class="card-num">04</p>
+          <h3 class="font-display card-title mt-5">Cultural &amp; Exhibition Spaces</h3>
+          <p class="mt-3 text-sm leading-relaxed">
+            The halls and public rooms where the four districts meet and mix.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Page previews
+       ==================================================================== -->
+  <section class="section--tight pb-section">
+    <div class="shell">
+      <div class="grid gap-5 md:grid-cols-2">
+
+        <a href="gallery.html" class="feature" data-reveal>
+          <img src="images/web/gallery1.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <p class="eyebrow">Gallery</p>
+          <h2 class="font-display display-sm mt-3">Drawings, renders and film</h2>
+          <p class="feature-desc mt-2 max-w-sm">
+            The full visual record of the project, from site studies to finished views.
+          </p>
         </a>
-      </p>
 
+        <a href="interactive.html" class="feature" data-reveal data-reveal-delay="120">
+          <img src="images/web/site-placeholder.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <p class="eyebrow">Interactive</p>
+          <h2 class="font-display display-sm mt-3">Walk the site plan</h2>
+          <p class="feature-desc mt-2 max-w-sm">
+            Select a district on the masterplan to open its floor plan and imagery.
+          </p>
+        </a>
+
+      </div>
     </div>
+  </section>
 
-  </div>
-</footer>
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer-grid">
 
-  <script src="js/main.js"></script>
-  <script>
-    // animate hero content on load
-    document.addEventListener('DOMContentLoaded', () => {
-      const hero = document.getElementById('heroContent');
-      setTimeout(() => hero.classList.add('fade-enter-active'), 100);
-      // update footer year
-      document.getElementById('year').textContent = new Date().getFullYear();
-    });
-  </script>
+        <div>
+          <a href="index.html" class="nav-brand">Aura&nbsp;Valley</a>
+          <p class="mt-5 max-w-sm text-sm leading-relaxed">
+            An integrated community in north Riyadh that brings work, living,
+            culture and entertainment together across four connected districts.
+          </p>
+
+          <div class="flex items-center gap-3 mt-7">
+            <a href="mailto:m.almutawa.arch@gmail.com" class="social" aria-label="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21.75 6.75v10.5A2.25 2.25 0 0 1 19.5 19.5H4.5A2.25 2.25 0 0 1 2.25 17.25V6.75
+                     M21.75 6.75A2.25 2.25 0 0 0 19.5 4.5H4.5A2.25 2.25 0 0 0 2.25 6.75
+                     m19.5 0L12 13.5 2.25 6.75" />
+              </svg>
+            </a>
+
+            <a href="tel:+966555760889" class="social" aria-label="Phone">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2.25 6.75A2.25 2.25 0 0 1 4.5 4.5h2.086c.51 0 .96.343 1.09.835l.723 2.708a1.125 1.125 0 0 1-.417 1.222l-1.293.97
+                     a11.04 11.04 0 0 0 5.318 5.318l.97-1.293a1.125 1.125 0 0 1 1.222-.417l2.708.723c.492.13.835.58.835 1.09V18
+                     a2.25 2.25 0 0 1-2.25 2.25H18C9.716 20.25 2.25 12.784 2.25 4.5z" />
+              </svg>
+            </a>
+
+            <a href="https://www.instagram.com/ar.m7mad.almutawa" target="_blank" rel="noopener"
+               class="social" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle cx="17" cy="7" r="1"></circle>
+              </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/in/mohammed-almutawa-6239282b5" target="_blank" rel="noopener"
+               class="social" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                <line x1="7.6" y1="10.6" x2="7.6" y2="16.6"></line>
+                <circle cx="7.6" cy="7.5" r="0.9"></circle>
+                <line x1="11.6" y1="10.6" x2="11.6" y2="16.6"></line>
+                <path d="M11.6 13.3a2.2 2.2 0 0 1 4.4 0v3.3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow eyebrow--plain">Explore</p>
+          <div class="mt-4 text-sm">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="gallery.html" class="footer-link">Gallery</a>
+            <a href="interactive.html" class="footer-link">Interactive</a>
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow eyebrow--plain">Contact</p>
+          <div class="mt-4 text-sm">
+            <a href="mailto:m.almutawa.arch@gmail.com" class="footer-link">m.almutawa.arch@gmail.com</a>
+            <a href="tel:+966555760889" class="footer-link">+966 55 576 0889</a>
+            <a href="https://www.instagram.com/ar.m7mad.almutawa" target="_blank" rel="noopener" class="footer-link">@ar.m7mad.almutawa</a>
+            <a href="https://www.linkedin.com/in/mohammed-almutawa-6239282b5" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="rule">
+
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-7 text-xs text-muted">
+        <p>&copy; <span data-year></span> Mohammed Al-Mutawa. All rights reserved.</p>
+        <p>
+          Interactive website developed by
+          <a href="https://imd10.github.io/Portfolio" target="_blank" rel="noopener"
+             class="underline underline-offset-4 decoration-muted/40 hover:text-primary transition-colors">iMD10</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js"></script>
 </body>
 </html>
